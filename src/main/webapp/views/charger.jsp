@@ -15,6 +15,15 @@
 </head>
 <body>
 <h1>Encargado</h1>
+<form action="/user/cerrar">
+    <div class="col-3 col-md-2">
+        <button  type="submit" class="btn btn-outline-success btn-sm buttonColor"
+                 style="width: 180px; height: 100px; color: #002F5D" onclick="">
+            <h5>CERRAR SESION</h5>
+        </button>
+    </div>
+</form>
+
 <div class="row justify-content-center mt-5">
     <div class="col-10">
         <div class="card">
@@ -58,7 +67,7 @@
                         </td>
                         <td>
 
-                            <form method="post" action="/user/aprove">
+                            <form method="post" action="/user/acept">
                                 <input hidden value="${incidencia.id}" name="id">
                                 <button type="submit" class="btn btn-outline-inadvertent btn-sm">
                                     Aprovar
@@ -67,7 +76,7 @@
                             <form method="post" action="/user/des-aprove">
                                 <input hidden value="${incidencia.id}" name="id">
                                 <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    Eliminar
+                                    Invalidar
                                 </button>
                             </form>
                         </td>

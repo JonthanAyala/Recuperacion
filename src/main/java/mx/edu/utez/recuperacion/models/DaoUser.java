@@ -49,7 +49,7 @@ public class DaoUser {
         List<Incidencia> incidencias = new ArrayList<>();
         try {
             conn = new MySQLConnection().connect();
-            String query = "SELECT * from incidencias where estado = 'Aceptada';";
+            String query = "SELECT * from incidencias where estado = 'Aceptada' OR  estado = 'Aprovada';";
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
             while (rs.next()){
@@ -123,7 +123,67 @@ public class DaoUser {
         return incidencias;
     }
 
+    public boolean saveIncidencia(Incidencia object){
+        try {
+            conn = new MySQLConnection().connect();
+            String query = "INSERT into incidencias (titulo, descripcion, tipo, estado, fk_user) values (?,?,?,?,?);";
+            pstm = conn.prepareStatement(query);
+            pstm.setString(1,object.getTitulo());
+            pstm.setString(2, object.getDescripcion());
+            pstm.setString(3,object.getTipo());
+            pstm.setString(4, object.getEstado());
+            pstm.setLong(5,object.getFk_user());
+            return pstm.executeUpdate() > 0; // == 1
+        }catch (SQLException e){
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE,"Error save"+e.getMessage());
+        }finally {
+            close();
+        }
+        return false;
+    }
+    public boolean invaliteI(Long id){
+        try {
+            conn = new MySQLConnection().connect();
+            String query = "UPDATE incidencias SET estado = 'Invalidado', mensaje = 'No procede' WHERE id = ?;";
+            pstm = conn.prepareStatement(query);
+            pstm.setLong(1,id);
+            return pstm.executeUpdate() > 0; // == 1
+        }catch (SQLException e){
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE,"Error save"+e.getMessage());
+        }finally {
+            close();
+        }
+        return false;
+    }
+    public boolean aceptI(Long id){
+        try {
+            conn = new MySQLConnection().connect();
+            String query = "UPDATE incidencias SET estado = 'Aceptada', mensaje = '' WHERE id = ?;";
+            pstm = conn.prepareStatement(query);
+            pstm.setLong(1,id);
+            return pstm.executeUpdate() > 0; // == 1
+        }catch (SQLException e){
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE,"Error acept"+e.getMessage());
+        }finally {
+            close();
+        }
+        return false;
+    }
 
+    public boolean aprove(Long id ){
+        try {
+            conn = new MySQLConnection().connect();
+            String query = "UPDATE incidencias SET estado = 'Aprovado', mensaje = 'Echale ganas' WHERE id = ?;";
+            pstm = conn.prepareStatement(query);
+            pstm.setLong(1,id);
+            return pstm.executeUpdate() > 0; // == 1
+        }catch (SQLException e){
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE,"Error aprove"+e.getMessage());
+        }finally {
+            close();
+        }
+        return false;
+    }
     public void close(){
         try {
             if(conn != null) conn.close();
