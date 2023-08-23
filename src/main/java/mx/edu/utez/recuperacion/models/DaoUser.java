@@ -71,7 +71,32 @@ public class DaoUser {
         return incidencias;
 
     }
+    public List<Incidencia> findIncidenciasUser(Long fk_user){
+        List<Incidencia> incidencias = new ArrayList<>();
+        try {
+            conn = new MySQLConnection().connect();
+            String query = "SELECT * from incidencias where fk_user = "+fk_user+";";
+            pstm = conn.prepareStatement(query);
+            rs = pstm.executeQuery();
+            while (rs.next()){
+                Incidencia incidencia = new Incidencia();
+                incidencia.setId(rs.getLong("id"));
+                incidencia.setTitulo(rs.getString("titulo"));
+                incidencia.setDescripcion(rs.getString("descripcion"));
+                incidencia.setTipo(rs.getString("tipo"));
+                incidencia.setEstado(rs.getString("estado"));
+                incidencia.setMensaje(rs.getString("mensaje"));
+                incidencia.setFk_user(rs.getLong("fk_user"));
+                incidencias.add(incidencia);
+            }
+        }catch (SQLException e){
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, "Error findAll"+e.getMessage());
+        }finally {
+            close();
+        }
+        return incidencias;
 
+    }
 
     public void close(){
         try {

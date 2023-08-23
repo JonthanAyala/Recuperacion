@@ -35,9 +35,11 @@
                 <thead style="background-color: #00AA83; color: white">
                 <tr>
                     <th>Id</th>
+                    <th>Titulo</th>
                     <th>Descripcion</th>
-                    <th>Mensaje</th>
+                    <th>Tipo</th>
                     <th>Estado</th>
+                    <th>Mensaje</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -45,27 +47,33 @@
                 <c:forEach var="incidencia" items="${incidencias}" varStatus="s">
                     <tr>
                         <td>
-                            <c:out value="${user.id}"/>
+                            <c:out value="${incidencia.id}"/>
                         </td>
                         <td>
-                            <c:out value="${user.descripcion}"/>
+                            <c:out value="${incidencia.titulo}"/>
                         </td>
                         <td>
-                            <c:out value="${user.mensaje}"/>
+                            <c:out value="${incidencia.descripcion}"/>
                         </td>
                         <td>
-                            <c:out value="${user.estado}"/>
+                            <c:out value="${incidencia.tipo}"/>
+                        </td>
+                        <td>
+                            <c:out value="${incidencia.estado}"/>
+                        </td>
+                        <td>
+                            <c:out value="${incidencia.mensaje}"/>
                         </td>
                         <td>
 
                             <form method="post" action="/user/aprove">
-                                <input hidden value="${user.id}" name="id">
+                                <input hidden value="${incidencia.id}" name="id">
                                 <button type="submit" class="btn btn-outline-inadvertent btn-sm">
                                     Aprovar
                                 </button>
                             </form>
                             <form method="post" action="/user/des-aprove">
-                                <input hidden value="${user.id}" name="id">
+                                <input hidden value="${incidencia.id}" name="id">
                                 <button type="submit" class="btn btn-outline-danger btn-sm">
                                     Eliminar
                                 </button>
@@ -83,6 +91,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="ModalI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

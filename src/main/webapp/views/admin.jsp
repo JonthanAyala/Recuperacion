@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
 </head>
 <body>
 <h1>Admin</h1>
@@ -33,7 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="user" items="${incidencias}" varStatus="s">
+                <c:forEach var="incidencia" items="${incidencias}" varStatus="s">
                     <tr>
                         <td>
                             <c:out value="${incidencia.id}"/>
@@ -80,5 +82,8 @@
         </div>
     </div>
 </div>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
 </body>
 </html>

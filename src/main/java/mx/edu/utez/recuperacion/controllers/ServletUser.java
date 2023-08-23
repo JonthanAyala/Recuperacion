@@ -46,6 +46,11 @@ public class ServletUser extends HttpServlet {
                 redirect = "/views/admin.jsp";
                 break;
             case "/user/usuario":
+                User user1 = (User) session.getAttribute("user");
+                Long userId = user1.getId_user();
+                System.out.println("User ID: " + userId);
+                List<Incidencia> incidencias2 = new DaoUser().findIncidenciasUser(userId);
+                req.setAttribute("incidencias", incidencias2);
                 redirect = "/views/user.jsp";
                 break;
             case "/user/charger":
