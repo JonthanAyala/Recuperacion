@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
     <title>usuario</title>
@@ -14,15 +17,14 @@
 </head>
 <body>
 <h1>Usuario</h1>
-
+<form action="/user/view-incidencia">
 <div class="col-3 col-md-2">
-    <button  type="button" class="btn btn-outline-success btn-sm buttonColor"
-             data-bs-toggle="modal" data-bs-target="#ModalI"
+    <button  type="submit" class="btn btn-outline-success btn-sm buttonColor"
              style="width: 180px; height: 100px; color: #002F5D" onclick="">
         <h5>Crear incidencia</h5>
     </button>
 </div>
-
+</form>
 <div class="row justify-content-center mt-5">
     <div class="col-10">
         <div class="card">
@@ -40,7 +42,6 @@
                     <th>Tipo</th>
                     <th>Estado</th>
                     <th>Mensaje</th>
-                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,21 +65,6 @@
                         <td>
                             <c:out value="${incidencia.mensaje}"/>
                         </td>
-                        <td>
-
-                            <form method="post" action="/user/aprove">
-                                <input hidden value="${incidencia.id}" name="id">
-                                <button type="submit" class="btn btn-outline-inadvertent btn-sm">
-                                    Aprovar
-                                </button>
-                            </form>
-                            <form method="post" action="/user/des-aprove">
-                                <input hidden value="${incidencia.id}" name="id">
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    Eliminar
-                                </button>
-                            </form>
-                        </td>
                     </tr>
                 </c:forEach>
                 <tr>
@@ -91,49 +77,5 @@
         </div>
     </div>
 </div>
-
-
-<div class="modal fade" id="ModalI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel"> Nueva incidencia </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="teacherForm" class="needs-validation" novalidate action="/user/save-teacher" method="post">
-                    <div class="row">
-                        <div class="col">
-                            <label for="titulo" class="fw-bold col-form-label">Titulo:</label>
-                            <input type="text" name="titulo" id="titulo" class="form-control" required>
-                            <div class="invalid-feedback">Campo obligatorio</div>
-                        </div>
-                        <div class="col">
-                            <textarea class="form-control textareaTittle" name="descripcion" id="descripcion"
-                                      style="font-size: 30px; overflow: hidden; resize: none"
-                                      maxlength="50" oninput="autoResize(this)"
-                                      placeholder="Descripcion de la incidencia" required >
-                            </textarea>
-                            <div class="invalid-feedback">Campo obligatorio</div>
-                        </div>
-                        <div class="col">
-                            <label for="tipo" class="fw-bold col-form-label">Tipo incidencia:</label>
-                            <input type="text" name="tipo" id="tipo" class="form-control" required>
-                            <div class="invalid-feedback">Campo obligatorio</div>
-                        </div>
-                    </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar </button>
-                <button type="submit" id="SaveTeacher" class="btn btn-primary" >Guardar</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
 </body>
 </html>

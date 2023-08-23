@@ -14,7 +14,6 @@ create table users(
 create table incidencias (
 	id int primary key auto_increment,
     titulo varchar(100),
-    titulo varchar(100),
     descripcion varchar(255),
     tipo varchar(100),
     estado varchar(30),

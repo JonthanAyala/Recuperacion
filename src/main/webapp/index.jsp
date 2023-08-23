@@ -11,7 +11,7 @@
     <form action="/user/login" method="post">
         <div class="mb-3">
             <label for="mail" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="mail" name="mail" novalide>
+            <input type="text" class="form-control" id="mail" name="mail" novalide>
         </div>
         <div class="mb-3">
             <label for="pass" class="form-label">Password</label>

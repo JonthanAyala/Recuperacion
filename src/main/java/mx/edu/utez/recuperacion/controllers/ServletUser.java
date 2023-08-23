@@ -20,7 +20,8 @@ import java.util.List;
         "/user/login",
         "/user/admin",
         "/user/usuario",
-        "/user/charger"
+        "/user/charger",
+        "/user/view-incidencia"
 })
 public class ServletUser extends HttpServlet {
 
@@ -54,7 +55,12 @@ public class ServletUser extends HttpServlet {
                 redirect = "/views/user.jsp";
                 break;
             case "/user/charger":
+                List<Incidencia> incidencias3 = new DaoUser().findIncidenciasCharger();
+                req.setAttribute("incidencias", incidencias3);
                 redirect = "/views/charger.jsp";
+                break;
+            case "/user/view-incidencia":
+                redirect = "/views/incidencia.jsp";
                 break;
             default:
                 System.out.println(action);
